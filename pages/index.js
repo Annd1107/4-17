@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Geist, Geist_Mono } from "next/font/google";
+import { useState } from "react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -12,15 +13,28 @@ const geistMono = Geist_Mono({
 });
 
 export default function Home() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
   return (
     <div className="w-full h-full font-sans">
-      <div className="flex flex-row sm:flex-row justify-between items-center bg-white p-4 fixed top-0 left-0 w-full z-50 shadow">
-        <img src="/tokilogo.png" className="h-12" />
-        <div className="flex flex-col sm:flex-row sm:space-x-10 space-y-2 sm:space-y-0 text-black text-sm sm:text-base mt-2 sm:mt-0">
+      <div className="bg-white p-4 fixed top-0 left-0 w-full z-50 shadow">
+        <div className="flex flex-row justify-evenly items-center">
+          <img src="/tokilogo.png" className="h-12" />
+          <button className="sm:hidden" onClick={() => setMenuOpen(!menuOpen)}>
+            <svg className="h-6 w-6 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 8h16M4 16h16" />
+            </svg>
+          </button>
+          <div
+          className={`flex flex-col space-x-6 sm:flex-row sm:justify-evenly items-center text-black text-sm sm:text-base mt-2 sm:mt-0 space-y-2 sm:space-y-0 ${
+            menuOpen ? "flex flex-row" : "hidden sm:flex"
+          }`}
+        >
           <p>Үйлчилгээ</p>
           <p>Давуу тал</p>
           <p>Мэдээ</p>
           <p>Хамтран ажиллах</p>
+        </div>
         </div>
       </div>
 
@@ -75,9 +89,9 @@ export default function Home() {
           <button className="bg-[#ffc63d] text-white px-8 py-3 rounded-full text-lg font-medium shadow-md">ДАВУУ ТАЛ</button>
         </div>
 
-        <div className="h-50 bg-black text-gray-400 py-10 px-6 flex flex-row justify-between">
+        <div className="h-50 bg-black text-gray-400 py-10 px-6 flex flex-col md:flex-row justify-between space-y-6 md:space-y-0">
           <img src="/tokilogo.png" className="h-10" />
-          <div className="space-y-4"> 
+          <div className="space-y-4">
             <p className="text-sm">Түгээмэл асуулт</p>
             <div className="flex items-center space-x-2">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
